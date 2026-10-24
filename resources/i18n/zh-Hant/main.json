@@ -109,6 +109,9 @@
             "home": "Home",
             "screenshot": "Screenshot"
         },
+        "color_range": "色彩範圍",
+        "color_range_full": "完整",
+        "color_range_limited": "有限",
         "deadzone": {
             "input_hint": "Dead zone value in percent",
             "stick_left": "Left stick",

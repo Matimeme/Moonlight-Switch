@@ -287,6 +287,15 @@ void MoonlightSession::start(ServerCallback<bool> callback, bool is_sunshine) {
     m_config.bitrate = Settings::instance().bitrate();
     m_config.encryptionFlags = m_is_sunshine ? ENCFLG_ALL : ENCFLG_VIDEO;
 
+    // Ask the host encoder for limited (16-235) or full (0-255) range video.
+    // moonlight-common-c sends this to the host as part of encoderCscMode.
+    m_config.colorRange = Settings::instance().full_color_range()
+                              ? COLOR_RANGE_FULL
+                              : COLOR_RANGE_LIMITED;
+    brls::Logger::info("MoonlightSession: Requested color range: {}",
+                       m_config.colorRange == COLOR_RANGE_FULL ? "full"
+                                                               : "limited");
+
     switch (Settings::instance().video_codec()) {
     case H264:
         m_config.supportedVideoFormats = VIDEO_FORMAT_H264;

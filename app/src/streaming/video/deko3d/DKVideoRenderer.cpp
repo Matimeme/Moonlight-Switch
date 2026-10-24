@@ -248,13 +248,21 @@ namespace
 
     static void getFrameColorInfo(AVFrame* frame, AVColorSpace& colorSpace,
                                   bool& colorFull) {
+        // Range that was requested from the host (Settings -> encoderCscMode).
+        const bool requestedFull = Settings::instance().full_color_range();
+
         colorFull = frame->color_range == AVCOL_RANGE_JPEG;
 
-        // NVDEC/NVTEGRA frames can report JPEG range even when stream
-        // negotiation requested limited range. This manifests as lifted blacks.
-        if (frame->format == AV_PIX_FMT_NVTEGRA &&
-            frame->color_range == AVCOL_RANGE_JPEG) {
-            colorFull = false;
+        if (frame->format == AV_PIX_FMT_NVTEGRA) {
+            // NVDEC/NVTEGRA frames can report JPEG range even when stream
+            // negotiation requested limited range. This manifests as lifted
+            // blacks, so the frame flag can't be trusted here: follow the range
+            // that was negotiated with the host instead.
+            colorFull = requestedFull;
+        } else if (frame->color_range == AVCOL_RANGE_UNSPECIFIED) {
+            // No range information in the frame, assume the host is sending
+            // the range that we requested.
+            colorFull = requestedFull;
         }
 
         switch (frame->colorspace) {

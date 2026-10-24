@@ -265,6 +265,10 @@ void Settings::load() {
                 m_enable_hdr = json_typeof(enable_hdr) == JSON_TRUE;
             }
 
+            if (json_t* full_color_range = json_object_get(settings, "full_color_range")) {
+                m_full_color_range = json_typeof(full_color_range) == JSON_TRUE;
+            }
+
             if (json_t* enable_upscaling = json_object_get(settings, "enable_upscaling")) {
                 set_upscaling(json_typeof(enable_upscaling) == JSON_TRUE);
             }
@@ -540,6 +544,7 @@ void Settings::save() {
             json_object_set_new(settings, "decoder_threads", json_integer(m_decoder_threads));
             json_object_set_new(settings, "frames_queue_size", json_integer(m_frames_queue_size));
             json_object_set_new(settings, "enable_hdr", m_enable_hdr ? json_true() : json_false());
+            json_object_set_new(settings, "full_color_range", m_full_color_range ? json_true() : json_false());
             json_object_set_new(settings, "enable_upscaling", upscaling() ? json_true() : json_false());
             json_object_set_new(settings, "upscaling_mode", json_integer(upscaling_mode()));
             json_object_set_new(settings, "enable_dithering", m_enable_dithering ? json_true() : json_false());

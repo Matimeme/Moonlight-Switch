@@ -337,6 +337,18 @@ SettingsTab::SettingsTab() {
     requestHdr->removeFromSuperView(true);
  #endif
 
+    // Limited (16-235) or full (0-255) video range requested from the host.
+    // Takes effect the next time a stream is started.
+    std::vector<std::string> colorRanges = {
+        "settings/color_range_limited"_i18n,
+        "settings/color_range_full"_i18n,
+    };
+    colorRange->init("settings/color_range"_i18n, colorRanges,
+                     Settings::instance().full_color_range() ? 1 : 0,
+                     [](int selected) {
+                         Settings::instance().set_full_color_range(selected == 1);
+                     });
+
     hwDecoding->init("settings/use_hw_decoding"_i18n, Settings::instance().use_hw_decoding(),
                      [](bool value) { Settings::instance().set_use_hw_decoding(value); });
 

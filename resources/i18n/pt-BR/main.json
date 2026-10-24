@@ -109,6 +109,9 @@
             "home": "Home",
             "screenshot": "Screenshot"
         },
+        "color_range": "Intervalo de cores",
+        "color_range_full": "Completo",
+        "color_range_limited": "Limitado",
         "deadzone": {
             "input_hint": "Dead zone value in percent",
             "stick_left": "Left stick",

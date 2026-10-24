@@ -109,6 +109,9 @@
             "home": "Home",
             "screenshot": "Screenshot"
         },
+        "color_range": "カラーレンジ",
+        "color_range_full": "フル",
+        "color_range_limited": "リミテッド",
         "deadzone": {
             "input_hint": "Dead zone value in percent",
             "stick_left": "Left stick",

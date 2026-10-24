@@ -109,6 +109,9 @@
             "home": "Домой",
             "screenshot": "Скриншот"
         },
+        "color_range": "Диапазон цветов",
+        "color_range_full": "Полный",
+        "color_range_limited": "Ограниченный",
         "deadzone": {
             "input_hint": "Значение мёртвой зоны в процентах",
             "stick_left": "Левый стик",

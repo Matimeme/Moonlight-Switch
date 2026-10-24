@@ -36,7 +36,10 @@
 
             <brls:BooleanCell
                 id="request_hdr"/>
-                
+
+            <brls:SelectorCell
+                id="color_range"/>
+
             <brls:SelectorCell
                 id="decoder"/>
 

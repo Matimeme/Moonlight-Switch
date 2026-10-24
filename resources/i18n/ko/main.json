@@ -109,6 +109,9 @@
             "home": "홈",
             "screenshot": "스크린샷"
         },
+        "color_range": "색상 범위",
+        "color_range_full": "전체",
+        "color_range_limited": "제한",
         "deadzone": {
             "input_hint": "데드존 값 (백분율)",
             "stick_left": "왼쪽 스틱",

@@ -146,6 +146,12 @@ class Settings : public Singleton<Settings> {
     }
     void set_request_hdr(bool request_hdr) { m_enable_hdr = request_hdr; }
 
+    // Color range requested from the host encoder:
+    //   false -> limited range (16-235), the historical default
+    //   true  -> full range (0-255), avoids the 16-235 squeeze
+    [[nodiscard]] bool full_color_range() const { return m_full_color_range; }
+    void set_full_color_range(bool full_color_range) { m_full_color_range = full_color_range; }
+
     [[nodiscard]] bool upscaling() const {
 #ifdef SUPPORT_UPSCALING
         return m_upscaling_mode != UPSCALING_OFF;
@@ -348,6 +354,7 @@ class Settings : public Singleton<Settings> {
 #endif
     int m_bitrate = 10000;
     bool m_enable_hdr = false;
+    bool m_full_color_range = false;
     UpscalingMode m_upscaling_mode = UPSCALING_OFF;
     bool m_enable_dithering = false;
     int m_dithering_strength = 3;
